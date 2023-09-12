@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+  labels:
+    app: order
+  annotations:
+    #Important Note:  Need to add health check path annotations in service level if we are planning to use multiple targets in a load balancer
+    alb.ingress.kubernetes.io/healthcheck-path: /order
+spec:
+  selector:
+    app: order
+  ports:
+    - port: 8080
+      protocol: TCP
+      name: http
